@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # snowflake init.d script.
 #
@@ -7,26 +7,27 @@
 #   /var/log/snowflake (chown daemon, chmod 775)
 
 APP_NAME="snowflake"
-MAIN_JAR="snowflake-1.0.jar"
-VERSION="1.0"
-APP_HOME="/usr/local/snowflake/current"
+MAIN_JAR="snowflake-1.0.2-SNAPSHOT.jar"
+VERSION="1.0.2-SNAPSHOT"
+APP_HOME="/home/ram/software/snowflake"
 MAIN_CLASS="com.twitter.service.snowflake.SnowflakeServer"
-DAEMON="/usr/local/bin/daemon"
+#DAEMON="/usr/local/bin/daemon"
 
 HEAP_OPTS="-Xmx700m -Xms700m -Xmn500m"
 JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 GC_OPTS="-XX:+UseConcMarkSweepGC -verbosegc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParNewGC -Xloggc:/var/log/snowflake/gc.log"
 DEBUG_OPTS="-XX:ErrorFile=/var/log/$APP_NAME/java_error%p.log"
 JAVA_OPTS="-server $GC_OPTS $JMX_OPTS $HEAP_OPTS $DEBUG_OPTS"
-JAVA_HOME=/usr/java/default
+#JAVA_HOME=/usr/java/default
 
-pidfile="/var/run/$APP_NAME/$APP_NAME.pid"
+pidfile="/home/ram/software/$APP_NAME/$APP_NAME.pid"
 daemon_args="--name $APP_NAME --pidfile $pidfile"
-daemon_start_args="--stdout=/var/log/$APP_NAME/stdout --stderr=/var/log/$APP_NAME/stderr"
+daemon_start_args="--stdout=$APP_HOME/stdout --stderr=$APP_HOME/stderr"
 
-function running() {
-  $DAEMON $daemon_args --running
-}
+#function running() {
+#  $DAEMON $daemon_args --running
+#echo "DAEMON NOT Implemented.."
+#}
 
 function find_java() {
   if [ ! -z "$JAVA_HOME" ]; then
@@ -58,21 +59,23 @@ case "$1" in
       echo "*** $JAVA_HOME/bin/java doesn't exist -- check JAVA_HOME?"
       exit 1
     fi
-    if running; then
-      echo "already running."
-      exit 0
-    fi
+#    if running; then
+#      echo "already running."
+#      exit 0
+#    fi
 
-    $DAEMON $daemon_args $daemon_start_args -- ${JAVA_HOME}/bin/java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/production.scala
+#    $DAEMON $daemon_args $daemon_start_args -- ${JAVA_HOME}/bin/java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/production.scala
+    ${JAVA_HOME}/bin/java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/development.scala
+ 
     tries=0
-    while ! running; do
-      tries=$((tries + 1))
-      if [ $tries -ge 5 ]; then
-        echo "FAIL"
-        exit 1
-      fi
-      sleep 1
-    done
+#    while ! running; do
+#      tries=$((tries + 1))
+#      if [ $tries -ge 5 ]; then
+#        echo "FAIL"
+#        exit 1
+#      fi
+#      sleep 1
+#    done
     echo "done."
   ;;
 
