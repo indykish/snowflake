@@ -1,5 +1,7 @@
 #!/usr/bin/ruby 
 require 'rubygems'
+$:.push('./gen-rb')
+require 'thrift'
 require 'snowflake'
 
 if ARGV.length < 3
@@ -13,13 +15,22 @@ agent   = ARGV.shift
 host, port = servers.split(/,/).first.split(/:/)
 p host
 p port
-socket = Thrift::Socket.new(host, port.to_i, 1)
-socket.open
-connection = Thrift::FramedTransport.new(socket)
-client = Snowflake::Client.new(Thrift::BinaryProtocol.new(connection))
 
-worker_id = client.get_worker_id
+socket = Thrift::Socket.new(host, port.to_i, timeout=nil)
+socket.open
+
+connection = Thrift::FramedTransport.new(socket)
+
+protocol=Thrift::BinaryProtocol.new(connection)
+
+client = Snowflake::Client.new(protocol)
+
+worker_id = client.get_id(agent)
 
 count.times do |i|
-  puts [client.get_id(agent).to_s, agent, worker_id.to_s].join(' ')
+  
+   #  puts [client.get_id(agent).to_s, agent, worker_id.to_s].join(' ')
+
+     puts [agent, worker_id.to_s].join('')
+
 end
