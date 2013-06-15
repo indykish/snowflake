@@ -7,9 +7,17 @@ dist
 *.ipr
 *.iws
 *.swp
-lib_managed
-project/boot
 .DS_Store
+
+# sbt specific
+project/boot
+project/project
+project/target
+project/plugins/project/
+lib_managed
 src_managed
 sbt-launch.jar
 .classpath.txt
+
+# Scala-IDE specific
+.scala_dependencies

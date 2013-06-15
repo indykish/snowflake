@@ -1,14 +1,14 @@
 import com.twitter.service.snowflake.{SnowflakeConfig, ReporterConfig}
 import com.twitter.logging.config.{LoggerConfig, FileHandlerConfig}
-import com.twitter.logging.Level
+import com.twitter.logging.Logger
 import com.twitter.zookeeper.ZookeeperClientConfig
 import java.net.InetAddress
 import com.twitter.ostrich.admin.config.AdminServiceConfig
 
 new SnowflakeConfig {
-  serverPort = 7609
+  serverPort = 7610
   datacenterId = 0
-  workerIdMap = Map(0 -> InetAddress.getLocalHost.getHostName)
+  workerIdMap = Map(1 -> InetAddress.getLocalHost.getHostName)
   workerIdZkPath = "/snowflake-servers"
   skipSanityChecks = false
   startupSleepMs = 10000
@@ -27,13 +27,14 @@ new SnowflakeConfig {
   }
 
   admin = new AdminServiceConfig {
-    httpPort = 9990
+    httpPort = 9991
   }
 
   loggers = new LoggerConfig {
     handlers = new FileHandlerConfig {
-      level = Level.DEBUG
-      filename = "snowflake.log"
+      filename = "snowflake2.log"
+      level = Logger.TRACE
     }
   }
+
 }
