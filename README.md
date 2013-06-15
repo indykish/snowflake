@@ -95,16 +95,24 @@ Unzip the `snowflake-package-dist.zip`
 
 Start `.\snowflake development.scala` from scripts dir.
 
+#### Ruby 2.0.0-p195
+
 Run `ruby client_test.rb`. (Move the thrift generated client files from `gen-rb` to `scripts` dir.)
+
+#### Scala 
+
+* 2.10.1
 
 A tested `scala 2.10.1` client is available. Refer the code from [megam_common](https:\\github.com\indykish\megam_common) 
 
-Unfortunately `scala.reflect.Manifest` uses `runtimeClass` as opposed to `erasure`, so we built `UThriftClient`
+In `2.10.1`  `scala.reflect.Manifest` uses `runtimeClass` as opposed to `erasure`, so we built `UThriftClient`
 and `USnowflakeClient`. 
 
-If you are on 2.9.2 then you can use the `com.twitter.service.snowflake.SnowflakeClient` 
+* 2.9.2 
 
-`UID` class uses `scalaz 7.0` and return `ValidationNel[Throwable, UniqueID tuple]` to the callee.
+If you are on `scala 2.9.2` then you can use the `com.twitter.service.snowflake.SnowflakeClient` 
+
+A Sample `UID` class for `scala 2.10.1` using `scalaz 7.0` returns `ValidationNel[Throwable, UniqueID tuple]` to the callee.
 
 ```java
 
