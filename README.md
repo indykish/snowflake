@@ -57,7 +57,7 @@ You should use NTP to keep your system clock accurate.  Snowflake protects from 
 
 * work under progress
 
-### Chef cookbook for megamsnowflake deb tested on Ubuntu 13.04, EC2
+### Chef cookbook for megamsnowflake
 
 * work under progress
 
@@ -151,11 +151,7 @@ object UID {
 
 ```
 
-### Production (`api.megam.co` in our case)
-
-* Chef cookbooks used at megam [megam chef-repo](https://github.com/indykish/chef-repo) - *work under progress
-
-* Download the megamsnowflake_0.1.0.deb - *work under progress.
+### Production [https://api.megam.co/id](https://api.megam.co/id) in our case
 
 #### DEB Package using sbt.
 
