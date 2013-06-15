@@ -51,11 +51,15 @@ You should use NTP to keep your system clock accurate.  Snowflake protects from 
 
 [![Build Status](https://secure.travis-ci.org/twitter/snowflake.png)](http://travis-ci.org/twitter/snowflake)
 
-### Download the deb tested on Ubuntu 13.04, EC2 
+### Download the deb tested on Ubuntu 13.04, EC2
 
-[megamsnowflake-0.1.0.deb](http://s3.com) - work under progress
+[megamsnowflake-0.1.0.deb](http://s3.com) 
 
-### Chef cookbook for megamsnowflake deb tested on Ubuntu 13.04, EC2 
+* work under progress
+
+### Chef cookbook for megamsnowflake deb tested on Ubuntu 13.04, EC2
+
+* work under progress
 
 [megam snowflake](http://github.com/indykish/chef-repo/tree/master/cookbooks/megam_snowflake) - work under progress
 
