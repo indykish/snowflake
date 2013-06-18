@@ -87,8 +87,9 @@ linuxPackageMappings in Debian <+= (com.typesafe.sbt.packager.debian.Keys.source
 }
 
 
-mappings in upload := Seq((new java.io.File(("%s-%s.deb") format("target/megamsnowflake", "0.12.3-build-100")),"megamsnowflake-0.1.0.deb"))
+mappings in upload := Seq((new java.io.File(("%s.jar") format("target/snowflake")),"jars/snowflake.jar"),
+					(new java.io.File(("%s-%s.deb") format("target/megamsnowflake", "0.12.3-build-0100")),"debs/megamsnowflake-0.1.0.deb"))
 
-host in upload := "s3sbt-test.s3.amazonaws.com"
+host in upload := "megampub.s3.amazonaws.com"
 
 credentials += Credentials(Path.userHome / "software" / "aws" / "keys" / "sbt_s3_keys")
