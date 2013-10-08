@@ -3,25 +3,19 @@ import Process._
 import com.typesafe.sbt.SbtNativePackager._
 import com.typesafe.sbt.packager.debian.Keys._
 import com.typesafe.sbt.packager.linux.LinuxPackageMapping
-import sbtrelease._
-import ReleasePlugin._
-import ReleaseKeys._
-import org.scalastyle.sbt.ScalastylePlugin
 import S3._
 
 seq(packagerSettings:_*)
 
 maintainer in Debian:= "Rajthilak <rajthilak@megam.co.in>"
 
-packageSummary := "Unique ID Generator Service - Twitters Snowflake."
+packageSummary := "Unique ID Generator - Twitters Snowflake."
 
-packageDescription in Debian:= "A Unique ID Generator package of Twitter's Snowflake project. This is leveraged by megam platform to spit out unique 64 bit IDs."
+packageDescription in Debian:= "A Unique ID Generator -Twitter's Snowflake project. Leveraged by megam platform to spit out unique 64 bit IDs."
 
 com.typesafe.sbt.packager.debian.Keys.name in Debian := "megamsnowflake"
 
-scalaVersion := "2.10.1"
-
-ScalastylePlugin.Settings
+scalaVersion := "2.10.3"
 
 s3Settings
 
@@ -52,6 +46,10 @@ linuxPackageMappings in Debian <+= (baseDirectory) map { bd =>
    withUser "root" withGroup "root" withPerms "0755")
 }
 
+linuxPackageMappings in Debian <+= (baseDirectory) map { bd =>
+  (packageMapping((bd / "target" / "debpkg" / "scripts" / "client_test.rb") -> "/usr/local/share/megamsnowflake/bin/client.rb")
+   withUser "root" withGroup "root" withPerms "0755")
+}
 
 
 linuxPackageMappings <+= (baseDirectory) map { bd =>

@@ -53,13 +53,9 @@ You should use NTP to keep your system clock accurate.  Snowflake protects from 
 
 ### Download the deb tested on Ubuntu 13.04, EC2
 
-[megamsnowflake-0.1.0.deb](http://s3.com) 
-
-* work under progress
+[megamsnowflake.deb](https://s3-ap-southeast-1.amazonaws.com/megampub/0.1/debs/megamsnowflake.deb) 
 
 ### Chef cookbook for megamsnowflake
-
-* work under progress
 
 [megam snowflake](http://github.com/indykish/chef-repo/tree/master/cookbooks/megam_snowflake) - work under progress
 
@@ -79,7 +75,8 @@ If you cloned [megam snowflake](https://github.com/indykish/snowflake)
 
 To build and test, run `mvn test`.
 
-To package, run `mvn package`. This produces `snowflake-package-dist-zip` with the following.
+To package, run `mvn package`. 
+This produces `snowflake-package-dist-zip` with the following directories.
 
 `scripts` - Ruby script, snowflake startup script
 `libs`    - Jar files as needed to run
@@ -95,24 +92,24 @@ Unzip the `snowflake-package-dist.zip`
 
 Start `.\snowflake development.scala` from scripts dir.
 
-#### Ruby 2.0.0-p195
+#### Ruby 2.0.0-p247
 
 Run `ruby client_test.rb`. (Move the thrift generated client files from `gen-rb` to `scripts` dir.)
 
 #### Scala 
 
-* 2.10.1
+* 2.10.3
 
-A tested `scala 2.10.1` client is available. Refer the code from [megam_common](https:\\github.com\indykish\megam_common) 
+A tested `scala 2.10.3` client is available. Refer the code from [megam_common](https:\\github.com\indykish\megam_common) 
 
-In `2.10.1`  `scala.reflect.Manifest` uses `runtimeClass` as opposed to `erasure`, so we built `UThriftClient`
+In `2.10.3`  `scala.reflect.Manifest` uses `runtimeClass` as opposed to `erasure`, so we built `UThriftClient`
 and `USnowflakeClient`. 
 
 * 2.9.2 
 
 If you are on `scala 2.9.2` then you can use the `com.twitter.service.snowflake.SnowflakeClient` 
 
-A Sample `UID` class for `scala 2.10.1` using `scalaz 7.0` returns `ValidationNel[Throwable, UniqueID tuple]` to the callee.
+A Sample `UID` class for `scala 2.10.3` using `scalaz 7.0` returns `ValidationNel[Throwable, UniqueID tuple]` to the callee.
 
 ```java
 
@@ -151,7 +148,7 @@ object UID {
 
 ```
 
-### Production [https://api.megam.co/id](https://api.megam.co/id) in our case
+### Production [https://api.megam.co/id](https://api.megam.co/id) in our case - coming soon
 
 #### DEB Package using sbt.
 
@@ -175,7 +172,7 @@ Generates the .deb package for this project.
 
 * `sbt debian:package-bin`
 
-### Upload the generated db to S3 [sbt-s3](https://github.com/sbt/sbt-s3)
+### Upload the generated deb to S3 [sbt-s3](https://github.com/sbt/sbt-s3)
 
 Create a file named sbt_s3_key under a known location `~/software/aws/keys` with the appropriate values.
 
@@ -191,7 +188,7 @@ Tweak the following lines in build.sbt as you need.
 
 ```java
 
-mappings in upload := Seq((new java.io.File(("%s-%s.deb") format("target/megamsnowflake", "0.12.3-build-100")),"megamsnowflake-0.1.0.deb"))
+mappings in upload := Seq((new java.io.File(("%s-%s.deb") format("target/megamsnowflake", "0.13.0-build-100")),"megamsnowflake-0.1.0.deb"))
 
 host in upload := "s3sbt-test.s3.amazonaws.com"
 ```
