@@ -22,6 +22,10 @@
 			<id>Central Maven repo</id>
 			<url>http://repo.maven.apache.org/maven2</url>
 		</repository>
+		<repository>
+			<id>OSS Sonatype</id>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
+		</repository> 
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -39,7 +43,7 @@
 		<pluginRepository>
 			<id>Twitter public Maven repo</id>
 			<url>http://maven.twttr.com</url>
-		</pluginRepository>
+		</pluginRepository>		
 	</pluginRepositories>
 	<parent>
 		<groupId>com.twitter</groupId>

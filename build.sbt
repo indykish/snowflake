@@ -84,9 +84,14 @@ linuxPackageMappings in Debian <+= (com.typesafe.sbt.packager.debian.Keys.source
   ) withUser "root" withGroup "root" withPerms "0644" gzipped) asDocs()
 }
 
+linuxPackageMappings in Debian <+= (baseDirectory) map { bd =>
+  (packageMapping((bd / "target/debpkg/snowflake-1.0.2-SNAPSHOT.jar") -> "/usr/local/share/megamsnowflake/snowflake-1.0.2-SNAPSHOT.jar")
+   withConfig())
+}
 
-mappings in upload := Seq((new java.io.File(("%s.jar") format("target/snowflake")),"jars/snowflake.jar"),
-					(new java.io.File(("%s-%s.deb") format("target/megamsnowflake", "0.12.3-build-0100")),"debs/megamsnowflake-0.1.0.deb"))
+
+mappings in upload := Seq((new java.io.File(("%s.jar") format("target/snowflake")),"0.1/jars/snowflake.jar"),
+					(new java.io.File(("%s-%s.deb") format("target/megamsnowflake", "0.13.0-build-0100")),"0.1/debs/megamsnowflake.deb"))
 
 host in upload := "megampub.s3.amazonaws.com"
 
