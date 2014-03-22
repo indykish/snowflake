@@ -14,7 +14,7 @@ SNOWFLAKE_HOME="$(cd "$(cd "$(dirname "$0")"; pwd -P)"/..; pwd)"
 MAIN_CLASS="com.twitter.service.snowflake.SnowflakeServer"
 SNOWFLAKE_CLASSPATH="$AKKA_HOME/config:$AKKA_HOME/lib/*"
 
-HEAP_OPTS="-Xmx700m -Xms700m -Xmn500m"
+HEAP_OPTS="-Xmx512m -Xms512m -Xmn256m"
 JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 GC_OPTS="-XX:+UseConcMarkSweepGC -verbosegc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParNewGC -Xloggc:/var/log/snowflake/gc.log"
 DEBUG_OPTS="-XX:ErrorFile=/var/log/$APP_NAME/java_error%p.log"
